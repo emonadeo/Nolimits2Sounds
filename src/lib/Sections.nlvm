@@ -1,0 +1,9 @@
+package lib;
+
+public class Sections
+{
+	// Template:
+	// public static final String <TrackedSound> = <Section>
+	public static final String BM_LIFTHILL = "bm_lift";
+	public static final String BM_ROAR = "bm_roar";
+}

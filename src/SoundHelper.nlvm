@@ -1,0 +1,41 @@
+import com.nolimitscoaster.*;
+
+import lib.*;
+import sounds.*;
+
+public class SoundHelper
+{
+	public static void init(Main script)
+	{
+		Simulator sim = script.getSimulator();
+		Coaster coaster = sim.getCoasterForEntityId(script.getParentEntityId());
+
+		if(coaster == null)
+		{
+			System.out.println("Error M8");
+			return;
+		}
+
+		if(Type.isTypeDeclared(coaster))
+		{
+			String type = Type.getTypeDeclared(coaster);
+
+			if(type == "bm")
+			{
+				// Bolliger & Mabillard
+				if(coaster.getSection(Sections.BM_LIFTHILL) != null)
+				{
+					BMLifthill lift = new BMLifthill(sim, coaster);
+				},
+				if(coaster.getSection(Sections.BM_ROAR) != null)
+				{
+					BMRoar roar = new BMRoar(sim, coaster);
+				}
+			}
+
+		} else {
+			System.out.println("Warning: No Coaster-Type found!");
+		}
+	}
+
+}

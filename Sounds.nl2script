@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <script>
+    <description>Adds various sounds to coasters</description>
+    <preview>thumbnail.png</preview>
+    <classpath>src</classpath>
+    <class>Main</class>
+    <sharedvm>false</sharedvm>
+
+    <resource id="bm_lifthill">assets/bm/lifthill.ogg</resource>
+    <resource id="bm_roar">assets/bm/roar.ogg</resource>
+  </script>
+</root>

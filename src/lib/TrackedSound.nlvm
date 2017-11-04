@@ -1,0 +1,100 @@
+package lib;
+
+import com.nolimitscoaster.*;
+import nlvm.math3d.*;
+
+public abstract class TrackedSound implements FrameListener
+{
+	private Coaster coaster;
+	private StaticSound[] sounds;
+	private Train[] trains;
+	private bool playing[];
+
+	public TrackedSound(Simulator sim, Coaster coaster, String resourceId)
+	{
+		this.coaster = coaster;
+
+		this.sounds = new StaticSound[coaster.getTrainCount()];
+		this.trains = new Train[coaster.getTrainCount()];
+		this.playing = new bool[coaster.getTrainCount()];
+
+		for(int i = 0; i < coaster.getTrainCount(); i++)
+		{
+			this.trains[i] = coaster.getTrainAt(i);
+			this.sounds[i] = StaticSound.loadFromResourceId(resourceId, 0);
+			this.onInit(this.sounds[i]);
+		}
+
+		sim.addFrameListener(this);
+	}
+
+	// Abstract Methods
+
+	public abstract bool shouldPlay(Coaster coaster, Train train);
+
+	public void onInit(StaticSound sound) {}
+
+	public void onFrame(StaticSound sound, Train train) {}
+
+	public void play(StaticSound sound)
+	{
+		sound.playLoop();
+	}
+
+	public void stop(StaticSound sound)
+	{
+		sound.stop();
+	}
+
+	// Other Methods
+
+	public void onNextFrame()
+	{
+		for(int i = 0; i < coaster.getTrainCount(); i++)
+		{
+			if(this.playing[i])
+			{
+				Vector3f pos = new Vector3f(0, 0, 0);
+				this.trains[i].getBogieOrientationAndPosition(0, null, null, null, pos);
+		    this.sounds[i].setPosition(pos);
+		    this.onFrame(this.sounds[i], this.trains[i]);
+
+				if(!this.shouldPlay(this.coaster, this.trains[i]))
+				{
+					this.stop(this.sounds[i]);
+					this.playing[i] = false;
+				}
+			}
+			else
+			{
+				if(this.shouldPlay(this.coaster, this.trains[i]))
+				{
+					this.play(this.sounds[i]);
+					this.playing[i] = true;
+				}
+			}
+		}
+	}
+
+	public StaticSound getSound(Train train)
+	{
+		for(int i = 0; i < this.trains.length; i++)
+		{
+			if(train == this.trains[i])
+				return this.sounds[i];
+		}
+
+		return null;
+	}
+
+	public bool isPlaying(Train train)
+	{
+		for(int i = 0; i < this.trains.length; i++)
+		{
+			if(train == this.trains[i])
+				return this.playing[i];
+		}
+
+		return false;
+	}
+}

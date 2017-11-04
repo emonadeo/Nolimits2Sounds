@@ -1,0 +1,18 @@
+import com.nolimitscoaster.*;
+
+public class Main extends Script
+{
+	private Coaster coaster;
+
+	public bool onInit()
+	{
+		SoundHelper.init(this);
+
+		return true;
+	}
+
+	public Simulator getSimulator()
+	{
+		return this.sim;
+	}
+}

@@ -1,0 +1,24 @@
+package lib;
+
+import com.nolimitscoaster.*;
+
+public class Type
+{
+	public static final String[] types = {"bm"};
+
+	public static bool isTypeDeclared(Coaster coaster)
+	{
+		return getTypeDeclared(coaster) != "";
+	}
+
+	public static String getTypeDeclared(Coaster coaster)
+	{
+		for(int i = 0; i < types.length; i++)
+		{
+			if(coaster.getSection(Type.types[i]) != null)
+				return Type.types[i];
+		}
+
+		return "";
+	}
+}

@@ -26,7 +26,7 @@ public class SoundHelper
 				if(coaster.getSection(Sections.BM_LIFTHILL) != null)
 				{
 					BMLifthill lift = new BMLifthill(sim, coaster);
-				},
+				} else
 				if(coaster.getSection(Sections.BM_ROAR) != null)
 				{
 					BMRoar roar = new BMRoar(sim, coaster);

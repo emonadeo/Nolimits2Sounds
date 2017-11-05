@@ -39,6 +39,23 @@ public class SoundHelper
 			soundFound = true;
 		}
 
+		// Misc
+		if(coaster.getSection(Sections.MISC_CLUNKY_LIFT) != null)
+		{
+			MiscClunkyLift lift = new MiscClunkyLift(sim, coaster);
+			soundFound = true;
+		}
+		if(coaster.getSection(Sections.MISC_OLD_LIFT) != null)
+		{
+			MiscOldLift lift = new MiscOldLift(sim, coaster);
+			soundFound = true;
+		}
+		if(coaster.getSection(Sections.MISC_ROAR) != null)
+		{
+			MiscRoar lift = new MiscRoar(sim, coaster);
+			soundFound = true;
+		}
+
 		if(!soundFound)
 		{
 			System.out.println("Warning: No Sounds found!");

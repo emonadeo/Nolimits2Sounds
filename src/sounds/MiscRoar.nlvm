@@ -5,11 +5,11 @@ import com.nolimitscoaster.*;
 import lib.*;
 
 // Credit goes to TheCodeMaster
-public class BMRoar extends TrackedSound
+public class MiscRoar extends TrackedSound
 {
-	public BMRoar(Simulator sim, Coaster coaster)
+	public MiscRoar(Simulator sim, Coaster coaster)
 	{
-		super(sim, coaster, Sections.BM_ROAR);
+		super(sim, coaster, Sections.MISC_ROAR);
 	}
 
 	public bool shouldPlay(Coaster coaster, Train train)

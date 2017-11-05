@@ -4,9 +4,13 @@ public class Sections
 {
 	// Template:
 	// public static final String <TrackedSound> = <Name>
-	
+
 	public static final String BM_LIFT = "bm_lift";
 	public static final String BM_ROAR = "bm_roar";
 
 	public static final String GCI_LIFT = "gci_lift";
+
+	public static final String MISC_CLUNKY_LIFT = "misc_clunky_lift";
+	public static final String MISC_OLD_LIFT = "misc_old_lift";
+	public static final String MISC_ROAR = "misc_roar";
 }

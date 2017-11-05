@@ -19,8 +19,11 @@ For example the sound `bm_lift` which applies the B&M Lift sound will only play 
 
 ## Soundlist
 
-| Name          | Description        | Global | Source                             |
-| ------------- | ------------------ | ------ | ---------------------------------- |
-| `bm_lift`     | B&M Lifthill Sound | No     | Silver Star @ Europapark           |
-| `bm_roar`     | B&M Roar Sound     | Yes    |                                    |
-| `gci_lift`    | GCI Lifthill Sound | No     | Wood Coaster @ Knight Valley China |
+| Name               | Description                                                                | Global | Source                       |
+| ------------------ | -------------------------------------------------------------------------- | ------ | ---------------------------- |
+| `bm_lift`          | B&M Lifthill Sound                                                         | No     | Silver Star @ Europapark     |
+| `bm_roar`          | B&M Roar Sound                                                             | Yes    |                              |
+| `gci_lift`         | GCI Lifthill Sound                                                         | No     | Wood Coaster @ Knight Valley |
+| `misc_clunky_lift` | Clunky Sound for slow Lifthills                                            | No     | Speed @ Oakwood              |
+| `misc_old_lift`    | Vintage Sound for normal and fast Lifthills. Similar to the existing Sound | No     | Speed @ Oakwood              |
+| `misc_roar`        | Roar Sound for most modern coasters                                        | Yes    |                              |

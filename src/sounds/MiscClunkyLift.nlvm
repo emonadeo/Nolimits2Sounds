@@ -1,0 +1,33 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import lib.*;
+
+public class MiscClunkyLift extends TrackedSound
+{
+	public MiscClunkyLift(Simulator sim, Coaster coaster)
+	{
+		super(sim, coaster, Sections.MISC_CLUNKY_LIFT);
+	}
+
+	public bool shouldPlay(Coaster coaster, Train train)
+	{
+		return coaster.getSection(Sections.MISC_CLUNKY_LIFT).getTrainOnSection() == train;
+	}
+
+	public void onInit(StaticSound sound)
+	{
+		sound.setDistanceParameters(5.0f, 1.0f);
+	}
+
+	public void onFrame(StaticSound sound, Train train)
+	{
+		sound.setPitch((float)train.getSpeed()/2.2f);
+		sound.setGain(1.5f/(float)train.getSpeed());
+		if(train.getSpeed() > 3.0f)
+		{
+			sound.setGainFaded(0.0f, 0.5f);
+		}
+	}
+}

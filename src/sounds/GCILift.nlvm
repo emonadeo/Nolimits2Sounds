@@ -1,0 +1,36 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import lib.*;
+
+public class GCILift extends TrackedSound
+{
+	public GCILift(Simulator sim, Coaster coaster)
+	{
+		super(sim, coaster, Sections.GCI_LIFT);
+	}
+
+	public bool shouldPlay(Coaster coaster, Train train)
+	{
+		return coaster.getSection(Sections.GCI_LIFT).getTrainOnSection() == train;
+	}
+
+	public void onInit(StaticSound sound)
+	{
+		sound.setGain(0.0f);
+		sound.setDistanceParameters(5.0f, 1.0f);
+	}
+
+	public void play(StaticSound sound)
+	{
+		sound.playLoop();
+    sound.setGainFaded(1.0f, 0.05f);
+	}
+
+	public void stop(StaticSound sound)
+	{
+		sound.setGainFaded(0.0f, 0.05f);
+    sound.stopFaded(0.05f);
+	}
+}

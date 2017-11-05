@@ -7,7 +7,9 @@
     <class>Main</class>
     <sharedvm>false</sharedvm>
 
-    <resource id="bm_lifthill">assets/bm/lifthill.ogg</resource>
+    <resource id="bm_lift">assets/bm/lifthill.ogg</resource>
     <resource id="bm_roar">assets/bm/roar.ogg</resource>
+
+    <resource id="gci_lift">assets/gci/lifthill.ogg</resource>
   </script>
 </root>

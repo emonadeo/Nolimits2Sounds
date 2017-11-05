@@ -16,25 +16,32 @@ public class SoundHelper
 			return;
 		}
 
-		if(Type.isTypeDeclared(coaster))
+		// ------ //
+		// Sounds //
+		// ------ //
+
+		bool soundFound = false;
+
+		// Bolliger & Mabillard
+		if(coaster.getSection(Sections.BM_LIFT) != null)
 		{
-			String type = Type.getTypeDeclared(coaster);
+			BMLift lift = new BMLift(sim, coaster);
+			soundFound = true;
+		}
+		if(coaster.getSection(Sections.BM_ROAR) != null)
+		{
+			BMRoar roar = new BMRoar(sim, coaster);
+			soundFound = true;
+		}
+		if(coaster.getSection(Sections.GCI_LIFT) != null)
+		{
+			GCILift lift = new GCILift(sim, coaster);
+			soundFound = true;
+		}
 
-			if(type == "bm")
-			{
-				// Bolliger & Mabillard
-				if(coaster.getSection(Sections.BM_LIFTHILL) != null)
-				{
-					BMLifthill lift = new BMLifthill(sim, coaster);
-				}
-				if(coaster.getSection(Sections.BM_ROAR) != null)
-				{
-					BMRoar roar = new BMRoar(sim, coaster);
-				}
-			}
-
-		} else {
-			System.out.println("Warning: No Coaster-Type found!");
+		if(!soundFound)
+		{
+			System.out.println("Warning: No Sounds found!");
 		}
 	}
 

@@ -1,9 +1,6 @@
 # Nolimits 2 Sounds
 
-![release](https://img.shields.io/github/release/emonadeo/nolimits2sounds.svg)
-![downloads](https://img.shields.io/github/downloads/emonadeo/nolimits2sounds/total.svg)
-![issues](https://img.shields.io/github/issues/emonadeo/nolimits2sounds.svg)
-![pulls](https://img.shields.io/github/issues-pr-closed/emonadeo/nolimits2sounds.svg)
+This is an OpenSource Project for rollercoaster related Sounds to add to the realism of NoLimits 2
 
 ## How to use
 
@@ -145,3 +142,5 @@ if(coaster.getSection(Sections.BM_LIFT) != null)
 #### Done!
 
 Your sound should now be in the game. To reload the Script ingame you don't have to reload the Park. Resetting the coaster inside the Control Panel **(F4)** also reloads the coaster.
+
+Once your done create a **Pull Request** and I will look into it and most likely add it to the library.

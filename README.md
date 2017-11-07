@@ -1,4 +1,4 @@
-# Nolimits 2 Sounds
+![Nolimits 2 Sounds](https://i.imgur.com/51oxkSC.png)
 
 This is an OpenSource Project for rollercoaster related Sounds to add to the realism of NoLimits 2
 

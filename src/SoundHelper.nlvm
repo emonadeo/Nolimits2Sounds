@@ -28,11 +28,8 @@ public class SoundHelper
 			BMLift lift = new BMLift(sim, coaster);
 			soundFound = true;
 		}
-		if(coaster.getSection(Sections.BM_ROAR) != null)
-		{
-			BMRoar roar = new BMRoar(sim, coaster);
-			soundFound = true;
-		}
+
+		// GCI
 		if(coaster.getSection(Sections.GCI_LIFT) != null)
 		{
 			GCILift lift = new GCILift(sim, coaster);
@@ -48,11 +45,6 @@ public class SoundHelper
 		if(coaster.getSection(Sections.MISC_OLD_LIFT) != null)
 		{
 			MiscOldLift lift = new MiscOldLift(sim, coaster);
-			soundFound = true;
-		}
-		if(coaster.getSection(Sections.MISC_ROAR) != null)
-		{
-			MiscRoar lift = new MiscRoar(sim, coaster);
 			soundFound = true;
 		}
 

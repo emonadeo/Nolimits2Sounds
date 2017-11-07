@@ -91,6 +91,7 @@ package sounds;
 
 import com.nolimitscoaster.*;
 
+import api.*;
 import lib.*;
 
 public class BMRoar extends TrackedSound

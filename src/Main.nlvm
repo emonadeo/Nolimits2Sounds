@@ -1,11 +1,21 @@
 import com.nolimitscoaster.*;
 
+import api.*;
+import lib.*;
+
 public class Main extends Script
 {
 	private Coaster coaster;
 
 	public bool onInit()
 	{
+		this.coaster = sim.getCoasterForEntityId(getParentEntityId());
+		MultiSection ms = MultiSection.getFromCoaster(coaster, Sections.BM_LIFT);
+		for(int i = 0; i < ms.getSections().length; i++)
+		{
+			System.out.println(ms.getSections()[i].getName());
+		}
+
 		SoundHelper.init(this);
 
 		return true;

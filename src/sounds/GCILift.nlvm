@@ -2,6 +2,7 @@ package sounds;
 
 import com.nolimitscoaster.*;
 
+import api.*;
 import lib.*;
 
 public class GCILift extends TrackedSound
@@ -13,7 +14,7 @@ public class GCILift extends TrackedSound
 
 	public bool shouldPlay(Coaster coaster, Train train)
 	{
-		return coaster.getSection(Sections.GCI_LIFT).getTrainOnSection() == train;
+		return multisection.isTrainOnMultiSection(train);
 	}
 
 	public void onInit(StaticSound sound)

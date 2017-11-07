@@ -1,4 +1,4 @@
-package lib;
+package api;
 
 import com.nolimitscoaster.*;
 import nlvm.math3d.*;
@@ -10,9 +10,12 @@ public abstract class TrackedSound implements FrameListener
 	private Train[] trains;
 	private bool playing[];
 
-	public TrackedSound(Simulator sim, Coaster coaster, String resourceId)
+	public MultiSection multisection;
+
+	public TrackedSound(Simulator sim, Coaster coaster, String sectionId)
 	{
 		this.coaster = coaster;
+		this.multisection = MultiSection.getFromCoaster(coaster, sectionId);
 
 		this.sounds = new StaticSound[coaster.getTrainCount()];
 		this.trains = new Train[coaster.getTrainCount()];
@@ -21,7 +24,7 @@ public abstract class TrackedSound implements FrameListener
 		for(int i = 0; i < coaster.getTrainCount(); i++)
 		{
 			this.trains[i] = coaster.getTrainAt(i);
-			this.sounds[i] = StaticSound.loadFromResourceId(resourceId, 0);
+			this.sounds[i] = StaticSound.loadFromResourceId(sectionId, 0);
 			this.onInit(this.sounds[i]);
 		}
 

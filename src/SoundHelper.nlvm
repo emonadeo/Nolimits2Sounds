@@ -23,28 +23,38 @@ public class SoundHelper
 		bool soundFound = false;
 
 		// Bolliger & Mabillard
-		if(coaster.getSection(Sections.BM_LIFT) != null)
+		if(hasSound(coaster, Sections.BM_LIFT))
 		{
 			BMLift lift = new BMLift(sim, coaster);
 			soundFound = true;
 		}
+		if(hasSound(coaster, Sections.BM_ROAR))
+		{
+			BMRoar roar = new BMRoar(sim, coaster);
+			soundFound = true;
+		}
 
 		// GCI
-		if(coaster.getSection(Sections.GCI_LIFT) != null)
+		if(hasSound(coaster, Sections.GCI_LIFT))
 		{
 			GCILift lift = new GCILift(sim, coaster);
 			soundFound = true;
 		}
 
 		// Misc
-		if(coaster.getSection(Sections.MISC_CLUNKY_LIFT) != null)
+		if(hasSound(coaster, Sections.MISC_CLUNKY_LIFT))
 		{
 			MiscClunkyLift lift = new MiscClunkyLift(sim, coaster);
 			soundFound = true;
 		}
-		if(coaster.getSection(Sections.MISC_OLD_LIFT) != null)
+		if(hasSound(coaster, Sections.MISC_OLD_LIFT))
 		{
 			MiscOldLift lift = new MiscOldLift(sim, coaster);
+			soundFound = true;
+		}
+		if(hasSound(coaster, Sections.MISC_ROAR))
+		{
+			MiscRoar roar = new MiscRoar(sim, coaster);
 			soundFound = true;
 		}
 
@@ -52,6 +62,11 @@ public class SoundHelper
 		{
 			System.out.println("Warning: No Sounds found!");
 		}
+	}
+
+	public static bool hasSound(Coaster coaster, String sectionId)
+	{
+		return coaster.getSection(sectionId + "_1") != null;
 	}
 
 }

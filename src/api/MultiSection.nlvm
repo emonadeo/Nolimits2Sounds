@@ -1,0 +1,54 @@
+package api;
+
+import com.nolimitscoaster.*;
+
+public class MultiSection
+{
+	private Coaster coaster;
+	private Section[] children;
+
+	public MultiSection(Coaster coaster, Section[] children)
+	{
+		this.coaster = coaster;
+		this.children = children;
+	}
+
+	public static MultiSection getFromCoaster(Coaster coaster, String sectionId)
+	{
+		int childrenLength = 0;
+		while(true)
+		{
+			if(coaster.getSection(sectionId + "_" + (childrenLength + 1)) != null)
+			{
+				childrenLength++;
+			}
+			else
+				break;
+		}
+
+		Section[] children = new Section[childrenLength];
+		for(int i = 0; i < childrenLength; i++)
+		{
+			children[i] = coaster.getSection(sectionId + "_" + (i + 1));
+		}
+
+		return new MultiSection(coaster, children);
+	}
+
+	public bool isTrainOnMultiSection(Train train)
+	{
+		for(int i = 0; i < children.length; i++)
+		{
+			if(children[i].getTrainOnSection() == train)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Section[] getSections()
+	{
+		return this.children;
+	}
+}

@@ -17,16 +17,15 @@ Let's say we have a Mine Train coaster that has 3 Lifthills and we want each lif
 
 ## Soundlist
 
-| Name               | Description                                                                | Global | Source                       |
-| ------------------ | -------------------------------------------------------------------------- | ------ | ---------------------------- |
-| `bm_lift`          | B&M Lifthill Sound                                                         | No     | Silver Star @ Europapark     |
-| `bm_roar`*         | B&M Roar Sound.                                                            | Yes    |                              |
-| `gci_lift`         | GCI Lifthill Sound                                                         | No     | Wood Coaster @ Knight Valley |
-| `misc_roar`*       | Roar suitable for most steel coaster types                                 | Yes    |                              |
-| `misc_clunky_lift` | Clunky Sound for slow Lifthills                                            | No     | Speed @ Oakwood              |
-| `misc_old_lift`    | Vintage Sound for normal and fast Lifthills. Similar to the existing Sound | No     | Speed @ Oakwood              |
-
-> \* Credit goes to **TheCodeMaster** for letting me implement his Roars
+| Name               | Description                                                                | Global | Source                       | Contributor |
+| ------------------ | -------------------------------------------------------------------------- | ------ | ---------------------------- | ----------- |
+| `bm_lift`          | B&M Lifthill Sound                                                         | No     | Silver Star @ Europapark     | |
+| `bm_roar`          | B&M Roar Sound.                                                            | Yes    |                              | TheCodeMaster |
+| `gci_lift`         | GCI Lifthill Sound                                                         | No     | Wood Coaster @ Knight Valley | |
+| `misc_roar`        | Roar suitable for most steel coaster types                                 | Yes    |                              | TheCodeMaster |
+| `misc_clunky_lift` | Clunky Sound for slow Lifthills                                            | No     | Speed @ Oakwood              | |
+| `misc_old_lift`    | Vintage Sound for normal and fast Lifthills. Similar to the existing Sound | No     | Speed @ Oakwood              | |
+| `misc_lsm`         | General Purpose LSM Sound as found on Premier Rides Launch Coasters        | No     |                              | [bestdani](https://github.com/bestdani) |
 
 # Contributing
 
@@ -135,7 +134,7 @@ public class BMRoar extends TrackedSound
 
 #### Using `MultiSection`
 
-Since Section Names in NoLimits 2 are unique you still might want to have your sound be applied to multiple sections. For this Reason I've provided a **MultiSection** object which your Sound-Class automatically implements. Access it any time by calling `this.ms`. Currently the MultiSection-Class has the following functions:
+Since Section Names in NoLimits 2 are unique you still might want to have your sound be applied to multiple sections. For this Reason I've provided a **MultiSection** object which your Sound-Class automatically implements. Access it any time by calling `this.multisection`. Currently the MultiSection-Class has the following functions:
 
 | Function                                            | Returns               | Description |
 | --------------------------------------------------- | --------------------- | ----------- |
@@ -148,7 +147,7 @@ Since Section Names in NoLimits 2 are unique you still might want to have your s
 This happens inside `src/SoundHelper.nlvm`. You just need to call you're constructor inside an if clause that checks if there is a Section on the coaster that is named after your sound. Additionally set the **soundFound** boolean to true so the Script knows that a sound got activated.
 
 ```
-if(coaster.getSection(Sections.BM_LIFT) != null)
+if(hasSound(coaster, Sections.BM_ROAR))
 {
 	BMRoar roar = new BMRoar(sim, coaster);
 	soundFound = true;

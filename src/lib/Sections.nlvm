@@ -13,4 +13,5 @@ public class Sections
 	public static final String MISC_CLUNKY_LIFT = "misc_clunky_lift";
 	public static final String MISC_OLD_LIFT = "misc_old_lift";
 	public static final String MISC_ROAR = "misc_roar";
+	public static final String MISC_LSM = "misc_lsm";
 }

@@ -9,8 +9,9 @@ This is an OpenSource Project for rollercoaster related Sounds to add to the rea
 2. Add the Script to a coaster. **Note:** It is not needed to change the coaster's operation mode to scripted.
 > *Add from File* `->` *Sounds.nl2script*
 
-3. You can now add any sound by naming sections. Some sounds are only applied to a single section, others apply globally.
-For example the sound `bm_lift` which applies the B&M Lift sound will only play on the section it is defined to. However when naming a section `bm_roar` the B&M Roar will be played on the entire coaster. **Note:** The B&M Roar is not yet implemented, I just used it as an example.
+3. You can now add any sound by naming sections. To support having a sound on multiple sections every section-name is appended by an underscore and a number starting at 1 going up with each additional section: `<section_name>_<number>`<br><br>
+Let's say we have a Mine Train coaster that has 3 Lifthills and we want each lifthill to have the `misc_old_lift` sound. In this case we name the first lifthill `misc_old_lift_1`, the second `misc_old_lift_2` and so on.<br><br>
+**Note:** Global sounds like `bm_roar` also have to be appended by `_1` due to the way this script works, even though you'd only add it once per coaster anyways.
 
 4. Switch to Play Mode and enjoy :)
 
@@ -19,9 +20,13 @@ For example the sound `bm_lift` which applies the B&M Lift sound will only play 
 | Name               | Description                                                                | Global | Source                       |
 | ------------------ | -------------------------------------------------------------------------- | ------ | ---------------------------- |
 | `bm_lift`          | B&M Lifthill Sound                                                         | No     | Silver Star @ Europapark     |
+| `bm_roar`*         | B&M Roar Sound.                                                            | Yes    |                              |
 | `gci_lift`         | GCI Lifthill Sound                                                         | No     | Wood Coaster @ Knight Valley |
+| `misc_roar`*       | Roar suitable for most steel coaster types                                 | Yes    |                              |
 | `misc_clunky_lift` | Clunky Sound for slow Lifthills                                            | No     | Speed @ Oakwood              |
 | `misc_old_lift`    | Vintage Sound for normal and fast Lifthills. Similar to the existing Sound | No     | Speed @ Oakwood              |
+
+> \* Credit goes to **TheCodeMaster** for letting me implement his Roars
 
 # Contributing
 
@@ -127,6 +132,16 @@ public class BMRoar extends TrackedSound
 	}
 }
 ```
+
+#### Using `MultiSection`
+
+Since Section Names in NoLimits 2 are unique you still might want to have your sound be applied to multiple sections. For this Reason I've provided a **MultiSection** object which your Sound-Class automatically implements. Access it any time by calling `this.ms`. Currently the MultiSection-Class has the following functions:
+
+| Function                                            | Returns               | Description |
+| --------------------------------------------------- | --------------------- | ----------- |
+| `isTrainOnMultiSection(Train train)`                | bool                  | Returns true if the specified train is on any of the Sections the Sound is bound to |
+| `getSections()`                                     | Section[]             | Returns all Sections the Sound is bound to in an Array |
+| `getFromCoaster(Coaster coaster, String sectionId)` | *static* MultiSection | Returns a MultiSection that includes all Sections of a coaster named after `sectionId` |
 
 #### Registering the Sound-Class
 

@@ -57,6 +57,11 @@ public class SoundHelper
 			MiscRoar roar = new MiscRoar(sim, coaster);
 			soundFound = true;
 		}
+		if(hasSound(coaster, Sections.MISC_LSM))
+		{
+			MiscLsm lsm = new MiscLsm(sim, coaster);
+			soundFound = true;
+		}
 
 		if(!soundFound)
 		{

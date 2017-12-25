@@ -52,7 +52,7 @@ Done :)
 
 #### 2. Nolimits-Exchange Forum
 
-There is alternatively a discussion thread on the nolimits-exchange forum ([Link]()). Simply post a new comment providing the information named above and we will be sure to check it out.
+There is alternatively a discussion thread on the nolimits-exchange forum ([Link](https://forum.nolimits-exchange.com/comments.php?DiscussionID=5256)). Simply post a new comment providing the information named above and we will be sure to check it out.
 
 ## Developers
 

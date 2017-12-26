@@ -4,13 +4,13 @@ This is an OpenSource Project for rollercoaster related Sounds to add to the rea
 
 ## How to use
 
-1. [Download](https://github.com/Emonadeo/Nolimits2Sounds/releases/latest) the latest release and copy it inside your park directory.
+1. [Download](https://github.com/Emonadeo/Nolimits2Sounds/releases/latest) the latest release and copy it into your park directory.
 
 2. Add the Script to a coaster. **Note:** It is not needed to change the coaster's operation mode to scripted.
-> *Add from File* `->` *Sounds.nl2script*
+> *Coaster Properties* `->` *Add from File* `->` *Sounds.nl2script*
 
 3. You can now add any sound by naming sections. To support having a sound on multiple sections every section-name is appended by an underscore and a number starting at 1 going up with each additional section: `<section_name>_<number>`<br><br>
-Let's say we have a Mine Train coaster that has 3 Lifthills and we want each lifthill to have the `misc_old_lift` sound. In this case we name the first lifthill `misc_old_lift_1`, the second `misc_old_lift_2` and so on.<br><br>
+Let's say we have a Mine Train coaster that has 3 Lifthills and we want each lift-hill to have the `misc_old_lift` sound. In this case we name the first lift-hill `misc_old_lift_1`, the second `misc_old_lift_2` and so on.<br><br>
 **Note:** Global sounds like `bm_roar` also have to be appended by `_1` due to the way this script works, even though you'd only add it once per coaster anyways.
 
 4. Switch to Play Mode and enjoy :)
@@ -50,9 +50,11 @@ Click [here](https://github.com/Emonadeo/Nolimits2Sounds/issues/new) and select 
 
 Done :)
 
-#### 2. Nolimits-Exchange Forum
+#### 2. NoLimits Central
 
-There is alternatively a discussion thread on the nolimits-exchange forum ([Link](https://forum.nolimits-exchange.com/comments.php?DiscussionID=5256)). Simply post a new comment providing the information named above and we will be sure to check it out.
+> This is the new place after Nolimits-Exchange shut down
+
+There is alternatively a discussion thread on NoLimits Central ([Link](https://nolimitscentral.com/forum/topic/49)). Simply post a new comment providing the information named above and we will be sure to check it out.
 
 ## Developers
 

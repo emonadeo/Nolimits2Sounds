@@ -146,7 +146,7 @@ Since Section Names in NoLimits 2 are unique you still might want to have your s
 
 #### Registering the Sound-Class
 
-This happens inside `src/SoundHelper.nlvm`. You just need to call you're constructor inside an if clause that checks if there is a Section on the coaster that is named after your sound. Additionally set the **soundFound** boolean to true so the Script knows that a sound got activated.
+This happens inside `src/SoundHelper.nlvm`. You just need to call your constructor inside an if clause that checks if there is a Section on the coaster that is named after your sound. Additionally set the **soundFound** boolean to true so the Script knows that a sound got activated.
 
 ```
 if(hasSound(coaster, Sections.BM_ROAR))

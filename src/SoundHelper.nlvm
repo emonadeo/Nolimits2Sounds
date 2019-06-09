@@ -41,6 +41,13 @@ public class SoundHelper
 			soundFound = true;
 		}
 
+		// RMC
+		if(hasSound(coaster, Sections.RMC_LIFT))
+		{
+			RMCLift lift = new RMCLift(sim, coaster);
+			soundFound = true;
+		}
+
 		// Misc
 		if(hasSound(coaster, Sections.MISC_CLUNKY_LIFT))
 		{

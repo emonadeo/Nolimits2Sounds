@@ -12,6 +12,8 @@
 
     <resource id="gci_lift">assets/gci/lifthill.ogg</resource>
 
+    <resource id="rmc_lift">assets/rmc/lifthill.ogg</resource>
+
     <resource id="misc_clunky_lift">assets/misc/clunky_lift.ogg</resource>
     <resource id="misc_old_lift">assets/misc/old_lift.ogg</resource>
     <resource id="misc_roar">assets/misc/roar.ogg</resource>

@@ -11,6 +11,7 @@ public class MiscLsm extends TrackedSound
     private static final float GAIN_BELOW_THRESHOLD_VALUE = 0;
     private float lastSpeed;
     private Simulator sim;
+    private int t = 0;
 
     public MiscLsm(Simulator sim, Coaster coaster)
     {
@@ -33,6 +34,10 @@ public class MiscLsm extends TrackedSound
 
     public void onFrame(StaticSound sound, Train train)
     {
+        t++;
+        if (t % 5 != 0)
+          return;
+
         float currentSpeed = (float) train.getSpeed();
         sound.setPitch(0.95f + currentSpeed * 0.01f);
         sound.setGainFaded(

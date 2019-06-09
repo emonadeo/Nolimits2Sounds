@@ -1,0 +1,30 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import api.*;
+import lib.*;
+
+public class JetRoar extends TrackedSound
+{
+	public JetRoar(Simulator sim, Coaster coaster)
+	{
+		super(sim, coaster, Sections.JET_ROAR);
+	}
+
+	public bool shouldPlay(Coaster coaster, Train train)
+	{
+		return true;
+	}
+
+	public void onFrame(StaticSound sound, Train train)
+	{
+		sound.setDistanceParameters((float)Math.abs(train.getSpeed()*2),2.0f);
+		sound.setPitch((float)Math.abs(train.getSpeed() / 25) + 0.35f);
+		sound.setGain((float)Math.abs(train.getSpeed() * 0.2) - 0.2f);
+
+		if (train.getSpeed() < 1) {
+			sound.setGain(0);
+		}
+	}
+}

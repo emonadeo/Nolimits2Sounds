@@ -48,6 +48,18 @@ public class SoundHelper
 			soundFound = true;
 		}
 
+		// JET
+		if(hasSound(coaster, Sections.JET_FUNKY_LIFT))
+		{
+			JetFunkyLift lift = new JetFunkyLift(sim, coaster);
+			soundFound = true;
+		}
+		if(hasSound(coaster, Sections.JET_ROAR))
+		{
+			JetRoar roar = new JetRoar(sim, coaster);
+			soundFound = true;
+		}
+
 		// Misc
 		if(hasSound(coaster, Sections.MISC_CLUNKY_LIFT))
 		{

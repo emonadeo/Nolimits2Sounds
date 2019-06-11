@@ -1,0 +1,141 @@
+package api;
+
+import com.nolimitscoaster.*;
+import nlvm.math3d.*;
+
+public abstract class NL2Sound implements FrameListener {
+
+    private String id;
+
+    private Coaster coaster;
+    private StaticSound[] sounds;
+    private Train[] trains;
+    private bool playing[];
+    private Section[] sections;
+
+    public NL2Sound(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void init(Simulator sim, Coaster coaster) {
+        System.out.println(id + " initialized!");
+
+        this.coaster = coaster;
+
+        this.sounds = new StaticSound[coaster.getTrainCount()];
+        this.trains = new Train[coaster.getTrainCount()];
+        this.playing = new bool[coaster.getTrainCount()];
+
+        for(int i = 0; i < coaster.getTrainCount(); i++)
+        {
+            this.trains[i] = coaster.getTrainAt(i);
+            this.sounds[i] = StaticSound.loadFromResourceId(id, 0);
+            this.onInit(this.sounds[i], this.trains[i]);
+        }
+
+        // Check single section
+        bool hasSingleSection = false;
+        if (coaster.getSection(id) != null) {
+            hasSingleSection = true;
+        }
+
+        // Check multi section
+        int n = 1;
+        while (coaster.getSection(this.id + "_" + n) != null) {
+            n++;
+        }
+
+        System.out.println(n);
+
+        if (hasSingleSection) {
+            this.sections = new Section[n];
+            this.sections[0] = coaster.getSection(id);
+        } else {
+            this.sections = new Section[n-1];
+        }
+
+        for (int i = 1; i < n; i++) {
+            if (!hasSingleSection) {
+                this.sections[i-1] = coaster.getSection(this.id + "_" + i);
+            } else {
+                this.sections[i] = coaster.getSection(this.id + "_" + i);
+            }
+        }
+
+        for (int i = 0; i < this.sections.length; i++) {
+            System.out.println(this.sections[i].getName());
+        }
+
+        sim.addFrameListener(this);
+    }
+
+    public void onNextFrame() {
+        for (int i = 0; i < coaster.getTrainCount(); i++) {
+
+            if (this.playing[i]) {
+
+                Vector3f pos = new Vector3f(0, 0, 0);
+                this.trains[i].getBogieOrientationAndPosition(0, null, null, null, pos);
+                this.sounds[i].setPosition(pos);
+                this.onFrame(this.sounds[i], this.trains[i]);
+
+                if (!this.shouldPlay(this.coaster, this.trains[i])) {
+                    this.stop(this.sounds[i], this.trains[i]);
+                    this.playing[i] = false;
+                }
+
+            } else {
+
+                if (this.shouldPlay(this.coaster, this.trains[i])) {
+                    this.play(this.sounds[i], this.trains[i]);
+                    this.playing[i] = true;
+                }
+            }
+        }
+    }
+
+    // ABSTRACT METHODS
+
+    /**
+    * Gets called once the simulation is started. Use this method to set default parameters.
+    */
+    public void onInit(StaticSound sound, Train train) {}
+
+    /**
+    * Returns true or false whether the sound should play or not.
+    * Don't change this method if you want the sound to play while the train is on the desired section.
+    * Always return true if you want the sound to be global.
+    */
+    public bool shouldPlay(Coaster coaster, Train train) {
+        for (int i = 0; i < this.sections.length; i++) {
+            if (sections[i].getTrainOnSection() == train) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+    * Called once every Frame while the sound is playing. Won't get called, if the sound isn't playing.
+    */
+    public void onFrame(StaticSound sound, Train train) {
+    }
+
+    /**
+    * Starts playing the Sound.
+    */
+    public void play(StaticSound sound, Train train) {
+        sound.playLoop();
+    }
+
+    /**
+    * Stops playing the Sound.
+    */
+    public void stop(StaticSound sound, Train train) {
+        sound.stop();
+    }
+}

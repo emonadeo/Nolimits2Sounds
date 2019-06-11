@@ -3,24 +3,22 @@ package sounds;
 import com.nolimitscoaster.*;
 
 import api.*;
-import lib.*;
 
-public class BMRoar extends TrackedSound
+public class BMRoar extends NL2Sound
 {
-	public BMRoar(Simulator sim, Coaster coaster)
-	{
-		super(sim, coaster, Sections.BM_ROAR);
-	}
+    public BMRoar(String id)
+    {
+        super(id);
+    }
 
-	public bool shouldPlay(Coaster coaster, Train train)
-	{
-		return true;
-	}
+    public bool shouldPlay(Coaster coaster, Train train) {
+        return true;
+    }
 
-	public void onFrame(StaticSound sound, Train train)
-	{
-		sound.setDistanceParameters((float)Math.abs(train.getSpeed()*2),2.0f);
-		sound.setPitch((float)Math.abs(train.getSpeed()/20));
-		sound.setGain((float)Math.abs(train.getSpeed()*200));
-	}
+    public void onFrame(StaticSound sound, Train train)
+    {
+        sound.setDistanceParameters((float)Math.abs(train.getSpeed()*2),2.0f);
+        sound.setPitch((float)Math.abs(train.getSpeed()/20));
+        sound.setGain((float)Math.abs(train.getSpeed()*200));
+    }
 }

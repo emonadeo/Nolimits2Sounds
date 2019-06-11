@@ -1,28 +1,24 @@
 import com.nolimitscoaster.*;
 
 import api.*;
-import lib.*;
+import sounds.*;
 
 public class Main extends Script
 {
-	private Coaster coaster;
+    private Coaster coaster;
 
-	public bool onInit()
-	{
-		this.coaster = sim.getCoasterForEntityId(getParentEntityId());
-		MultiSection ms = MultiSection.getFromCoaster(coaster, Sections.BM_LIFT);
-		for(int i = 0; i < ms.getSections().length; i++)
-		{
-			System.out.println(ms.getSections()[i].getName());
-		}
+    private NL2Sound[] sounds = {
+        new BMRoar("bm_roar"),
+        new BMLift("bm_lift")
+    };
 
-		SoundHelper.init(this);
+    public bool onInit() {
+        this.coaster = sim.getCoasterForEntityId(this.getParentEntityId());
 
-		return true;
-	}
-
-	public Simulator getSimulator()
-	{
-		return this.sim;
-	}
+        for (int i = 0; i < this.sounds.length; i++) {
+            if (coaster.getSection(this.sounds[i].getId()) != null || coaster.getSection(this.sounds[i].getId() + "_1") != null)
+                this.sounds[i].init(this.sim, this.sim.getCoasterForEntityId(getParentEntityId()));
+        }
+        return true;
+    }
 }

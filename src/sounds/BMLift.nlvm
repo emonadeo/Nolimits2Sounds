@@ -3,40 +3,34 @@ package sounds;
 import com.nolimitscoaster.*;
 
 import api.*;
-import lib.*;
 
-public class BMLift extends TrackedSound
+public class BMLift extends NL2Sound
 {
-	public BMLift(Simulator sim, Coaster coaster)
-	{
-		super(sim, coaster, Sections.BM_LIFT);
-	}
+    public BMLift(String id)
+    {
+        super(id);
+    }
 
-	public bool shouldPlay(Coaster coaster, Train train)
-	{
-		return multisection.isTrainOnMultiSection(train);
-	}
+    public void onInit(StaticSound sound, Train train)
+    {
+        sound.setGain(0.0f);
+        sound.setDistanceParameters(5.0f, 1.0f);
+    }
 
-	public void onInit(StaticSound sound)
-	{
-		sound.setGain(0.0f);
-		sound.setDistanceParameters(5.0f, 1.0f);
-	}
+    public void onFrame(StaticSound sound, Train train)
+    {
+        sound.setPitch((float)train.getSpeed()/2.85f);
+    }
 
-	public void onFrame(StaticSound sound, Train train)
-	{
-		sound.setPitch((float)train.getSpeed()/2.85f);
-	}
+    public void play(StaticSound sound, Train train)
+    {
+        sound.playLoop();
+        sound.setGainFaded(1.0f, 2.0f);
+    }
 
-	public void play(StaticSound sound)
-	{
-		sound.playLoop();
-    sound.setGainFaded(1.0f, 2.0f);
-	}
-
-	public void stop(StaticSound sound)
-	{
-		sound.setGainFaded(0.0f, 0.2f);
-    sound.stopFaded(0.2f);
-	}
+    public void stop(StaticSound sound, Train train)
+    {
+        sound.setGainFaded(0.0f, 0.2f);
+        sound.stopFaded(0.2f);
+    }
 }

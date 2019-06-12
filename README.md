@@ -17,19 +17,18 @@ Let's say we have a Mine Train coaster that has 3 Lifthills and we want each lif
 
 ## Soundlist
 
-| Name               | Description                                                                | Global | Source                       | Contributor |
-| ------------------ | -------------------------------------------------------------------------- | ------ | ---------------------------- | ----------- |
-| `bm_lift`          | B&M Lifthill Sound                                                         | No     | Silver Star @ Europapark     | |
-| `bm_roar`          | B&M Roar Sound                                                             | Yes    |                              | [TheCodeMaster](https://nolimitscentral.com/account/thecodemaster) |
-| `gci_lift`         | GCI Lifthill Sound                                                         | No     | Wood Coaster @ Knight Valley | |
-| `gci_lift`         | GCI Lifthill Sound                                                         | No     | Wood Coaster @ Knight Valley | |
-| `rmc_lift`         | RMC Lifthill Sound                                                         | No     | Twisted Timbers @ Kings Island | |
-| `jet_funky_lift`   | Funky Lifthill Sound for sketchy Jet Co**r**sters                          | No     | Chupy Coaster @ Washuzan Highland | [Jetcoasterfan](https://nolimitscentral.com/account/jetcoasterfan) |
-| `jet_roar`         | Jet Coaster Roar Sound                                                     | Yes    | Hurry Coaster @ Kobe Fruit and Flower Park | [Jetcoasterfan](https://nolimitscentral.com/account/jetcoasterfan) |
-| `misc_roar`        | Roar suitable for most steel coaster types                                 | Yes    |                              | [TheCodeMaster](https://nolimitscentral.com/account/thecodemaster) |
-| `misc_clunky_lift` | Clunky Sound for slow Lifthills                                            | No     | Speed @ Oakwood              | |
-| `misc_old_lift`    | Vintage Sound for normal and fast Lifthills. Similar to the existing Sound | No     | Speed @ Oakwood              | |
-| `misc_lsm`         | General Purpose LSM Sound as found on Premier Rides Launch Coasters        | No     |                              | [bestdani](https://nolimitscentral.com/account/bestdani) |
+| Name | Description | Global | Source | Contributor |
+| ---- | ----------- | ------ | ------ | ----------- |
+| `bm_lift` | B&M Lifthill Sound | No | Silver Star @ Europapark | |
+| `bm_roar` | B&M Roar Sound | Yes | | [TheCodeMaster](https://nolimitscentral.com/account/thecodemaster) |
+| `gci_lift` | GCI Lifthill Sound | No | Wood Coaster @ Knight Valley | |
+| `rmc_lift` | RMC Lifthill Sound | No | Twisted Timbers @ Kings Island | |
+| `jet_funky_lift` | Funky Lifthill Sound for sketchy Jet Co**r**sters  | No | Chupy Coaster @ Washuzan Highland | [Jetcoasterfan](https://nolimitscentral.com/account/jetcoasterfan) |
+| `jet_roar` | Jet Coaster Roar Sound | Yes | Hurry Coaster @ Kobe Fruit and Flower Park | [Jetcoasterfan](https://nolimitscentral.com/account/jetcoasterfan) |
+| `misc_roar` | Roar suitable for most steel coaster types | Yes | | [TheCodeMaster](https://nolimitscentral.com/account/thecodemaster) |
+| `misc_clunky_lift` | Clunky Sound for slow Lifthills | No | Speed @ Oakwood | |
+| `misc_old_lift` | Vintage Sound for normal and fast Lifthills. Similar to the existing Sound | No | Speed @ Oakwood | |
+| `misc_lsm` | General Purpose LSM Sound as found on Premier Rides Launch Coasters | No | | [bestdani](https://nolimitscentral.com/account/bestdani) |
 
 # Contributing
 

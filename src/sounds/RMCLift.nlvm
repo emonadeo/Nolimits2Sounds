@@ -4,9 +4,9 @@ import com.nolimitscoaster.*;
 
 import api.*;
 
-public class BMLift extends NL2Sound
+public class RMCLift extends NL2Sound
 {
-    public BMLift(String id)
+    public RMCLift(String id)
     {
         super(id);
     }
@@ -15,11 +15,6 @@ public class BMLift extends NL2Sound
     {
         sound.setGain(0.0f);
         sound.setDistanceParameters(5.0f, 1.0f);
-    }
-
-    public void onFrame(StaticSound sound, Train train)
-    {
-        sound.setPitch((float)train.getSpeed()/2.85f);
     }
 
     public void play(StaticSound sound, Train train)

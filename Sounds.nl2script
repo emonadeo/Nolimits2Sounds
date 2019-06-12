@@ -8,11 +8,13 @@
     <sharedvm>false</sharedvm>
 
     <resource id="bm_lift">assets/bm/lifthill.ogg</resource>
+    <resource id="bm_lift_end">assets/bm/lifthill_end.ogg</resource>
     <resource id="bm_roar">assets/bm/roar.ogg</resource>
 
     <resource id="gci_lift">assets/gci/lifthill.ogg</resource>
 
     <resource id="rmc_lift">assets/rmc/lifthill.ogg</resource>
+    <resource id="rmc_lift_end">assets/rmc/lifthill_end.ogg</resource>
 
     <resource id="jet_funky_lift">assets/jet/funky_lift.ogg</resource>
     <resource id="jet_roar">assets/jet/roar.ogg</resource>

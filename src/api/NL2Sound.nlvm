@@ -3,12 +3,14 @@ package api;
 import com.nolimitscoaster.*;
 import nlvm.math3d.*;
 
-public abstract class NL2Sound implements FrameListener {
+public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
 
     private String id;
 
     private Coaster coaster;
     private StaticSound[] sounds;
+    private StaticSound[] ends;
+    private bool hasEnd = true;
     private Train[] trains;
     private bool playing[];
     private Section[] sections;
@@ -22,19 +24,25 @@ public abstract class NL2Sound implements FrameListener {
     }
 
     public void init(Simulator sim, Coaster coaster) {
-        System.out.println(id + " initialized!");
-
         this.coaster = coaster;
 
         this.sounds = new StaticSound[coaster.getTrainCount()];
+        this.ends = new StaticSound[coaster.getTrainCount()];
         this.trains = new Train[coaster.getTrainCount()];
         this.playing = new bool[coaster.getTrainCount()];
+
+        this.hasEnd = StaticSound.loadFromResourceId(this.id + "_end", 0) != null;
 
         for(int i = 0; i < coaster.getTrainCount(); i++)
         {
             this.trains[i] = coaster.getTrainAt(i);
-            this.sounds[i] = StaticSound.loadFromResourceId(id, 0);
-            this.onInit(this.sounds[i], this.trains[i]);
+            this.sounds[i] = StaticSound.loadFromResourceId(this.id, 0);
+            this.onInit(this.sounds[i]);
+
+            if (this.hasEnd) {
+                this.ends[i] = StaticSound.loadFromResourceId(this.id + "_end", 0);
+                this.onInit(this.ends[i]);
+            }
         }
 
         // Check single section
@@ -48,8 +56,6 @@ public abstract class NL2Sound implements FrameListener {
         while (coaster.getSection(this.id + "_" + n) != null) {
             n++;
         }
-
-        System.out.println(n);
 
         if (hasSingleSection) {
             this.sections = new Section[n];
@@ -66,8 +72,13 @@ public abstract class NL2Sound implements FrameListener {
             }
         }
 
-        for (int i = 0; i < this.sections.length; i++) {
-            System.out.println(this.sections[i].getName());
+        // Check single trigger
+        if (this.coaster.getTrackTrigger(this.id + "_end") != null) {
+            this.coaster.getTrackTrigger(this.id + "_end").addTrackTriggerListener(this);
+        }
+
+        for (int m = 1; this.coaster.getTrackTrigger(this.id + "_end_" + m) != null; m++) {
+            this.coaster.getTrackTrigger(this.id + "_end_" + m).addTrackTriggerListener(this);
         }
 
         sim.addFrameListener(this);
@@ -98,12 +109,31 @@ public abstract class NL2Sound implements FrameListener {
         }
     }
 
+    public void onTrainEntering(TrackTrigger trigger, Train train) {
+        for (int i = 0; i < this.trains.length; i++) {
+            if (this.trains[i] == train) {
+                this.stop(this.sounds[i], train);
+                if (this.hasEnd) {
+                    Vector3f pos = new Vector3f(0, 0, 0);
+                    train.getBogieOrientationAndPosition(0, null, null, null, pos);
+                    this.ends[i].setPosition(pos);
+                    this.playEnd(ends[i], train);
+                }
+                return;
+            }
+        }
+    }
+
+    public void onTrainLeaving(TrackTrigger trigger, Train train) {}
+
     // ABSTRACT METHODS
 
     /**
     * Gets called once the simulation is started. Use this method to set default parameters.
     */
-    public void onInit(StaticSound sound, Train train) {}
+    public void onInit(StaticSound sound) {
+        sound.setGain(0.0f);
+    }
 
     /**
     * Returns true or false whether the sound should play or not.
@@ -130,6 +160,14 @@ public abstract class NL2Sound implements FrameListener {
     */
     public void play(StaticSound sound, Train train) {
         sound.playLoop();
+    }
+
+    /**
+    * Starts playing the End Sound.
+    */
+    public void playEnd(StaticSound sound, Train train) {
+        sound.setGain(1.0f);
+        sound.play();
     }
 
     /**

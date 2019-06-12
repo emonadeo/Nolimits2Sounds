@@ -31,13 +31,13 @@ This is a free-to-use and open-source collection of scripted sounds for coasters
 
 ![Guide](https://i.imgur.com/6ZLpG96.png)
 
-1. **Select a section** (Can be a lift, station or block brake)
+1. **Select the section you want to add a sound to** (Can be a lift, station or block brake)
 
 2. **Open Type Settings** (Or double-click the section directly)
 
-3. **Choose a sound and name your section alike.**  
-If you want to use the same sound on multiple sections, simply append the name by `_` and a counter starting from 1. If you want to add a global sound i.e. a roar, you can name any unused section *(= station, lift or block brake)*.  
-*(See example below)*
+3. **Rename the section to the sound's name** *(See example below)*  
+    > **Multiple Sections:** You can't give two sections the same name. If you want to use the same sound on multiple sections, append the name by an underscore (`_`) and a number counting upwards starting from 1.  
+    **Roar Sounds**: If you want to add a roar sound, you can name any unused section *(i.e. station, lift or block brake)*. Roar sounds are always played and not limited to that section.    
 
 4. **Done**
 

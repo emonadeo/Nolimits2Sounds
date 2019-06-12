@@ -19,8 +19,34 @@ This is a free-to-use and open-source collection of scripted sounds for coasters
 
 ## How to use
 
-To Do
+### 1. **[Download](https://github.com/Emonadeo/Nolimits2Sounds/releases/latest) the latest release and unpack it into your park directory.**
 
-## Contributing
+### 2. **Add the Script to your coaster.**
+
+> **Note:** It is not needed to change the coaster's operation mode to scripted.
+
+![Guide](https://i.imgur.com/WnXCoxe.png)
+
+### 3. **Assign any desired sound to a section.**
+
+![Guide](https://i.imgur.com/6ZLpG96.png)
+
+1. **Select a section** (Can be a lift, station or block brake)
+
+2. **Open Type Settings** (Or double-click the section directly)
+
+3. **Choose a sound and name your section alike.**  
+If you want to use the same sound on multiple sections, simply append the name by `_` and a counter starting from 1. If you want to add a global sound i.e. a roar, you can name any unused section *(= station, lift or block brake)*.  
+*(See example below)*
+
+4. **Done**
+
+## Example
+
+![Example](https://i.imgur.com/CFcHpO3.png)
+
+## Creating your own Sound
+
+> **Note:** Creating sounds requires basic knowledge of scripting
 
 See Instructions on how to make your own Sounds on the [Wiki](https://github.com/Emonadeo/Nolimits2Sounds/wiki)

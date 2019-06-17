@@ -77,8 +77,9 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
             this.coaster.getTrackTrigger(this.id + "_end").addTrackTriggerListener(this);
         }
 
-        for (int m = 1; this.coaster.getTrackTrigger(this.id + "_end_" + m) != null; m++) {
-            this.coaster.getTrackTrigger(this.id + "_end_" + m).addTrackTriggerListener(this);
+        // Check multi section
+        for (int m = 1; this.coaster.getTrackTrigger(this.id + "_" + m + "_end") != null; m++) {
+            this.coaster.getTrackTrigger(this.id + "_" + m + "_end").addTrackTriggerListener(this);
         }
 
         sim.addFrameListener(this);

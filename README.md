@@ -17,7 +17,9 @@ This is a free-to-use and open-source collection of scripted sounds for coasters
 | `misc_old_lift` | Vintage Sound for normal and fast Lifthills. Similar to the existing Sound | Speed @ Oakwood | |
 | `misc_lsm` | General Purpose LSM Sound | | [bestdani](https://nolimitscentral.com/account/bestdani) |
 
-## How to use
+# Usage Guide
+
+## Setup
 
 ### 1. **[Download](https://github.com/Emonadeo/Nolimits2Sounds/releases/latest) the latest release and unpack it into your park directory.**
 
@@ -27,9 +29,9 @@ This is a free-to-use and open-source collection of scripted sounds for coasters
 
 ![Guide](https://i.imgur.com/WnXCoxe.png)
 
-### 3. **Assign any desired sound to a section.**
+## Assigning Sounds
 
-![Guide](https://i.imgur.com/6ZLpG96.png)
+![Guide](https://i.imgur.com/WRDD4jL.png)
 
 1. **Select the section you want to add a sound to** (Can be a lift, station or block brake)
 
@@ -41,11 +43,28 @@ This is a free-to-use and open-source collection of scripted sounds for coasters
 
 4. **Done**
 
-## Example
+## Controlling Sounds
 
-![Example](https://i.imgur.com/CFcHpO3.png)
+Currently a sound keeps playing until the very last car of a train exits the section.
+By adding a **trigger** to your track, you can define when a sound should cut off as a train enters the trigger.
+Some sounds even play an additional audio clip, e.g. the chain dog detaching from the chain.
 
-## Creating your own Sound
+![Guide](https://i.imgur.com/LuGlHVQ.png)
+
+1. **Select the _"Add Trigger"_ tool**
+
+2. **Add a trigger to the desired cutoff position**
+    > **Note:** The sound ends as soon as the first car enters the trigger.
+    Also consider that some sounds play an additional audio clip instead of being cut off immediatly.
+    
+3. **Name the trigger identical to the corresponding section + `_end`**
+
+### Example
+
+![Example](https://i.imgur.com/hpNbTk6.png)
+
+
+# Creating your own Sounds
 
 > **Note:** Creating sounds requires basic knowledge of scripting
 

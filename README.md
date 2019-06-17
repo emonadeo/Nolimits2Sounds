@@ -1,6 +1,7 @@
 ![Nolimits 2 Sounds](https://i.imgur.com/oy2bPhU.png)
 
-This is a free-to-use and open-source collection of scripted sounds for coasters, including custom lift-hill sounds and various roars.
+This is a free-to-use and open-source collection of scripted sounds for coasters,
+including custom lift-hill sounds and various roars. &mdash; **[Download](https://github.com/Emonadeo/Nolimits2Sounds/releases/latest)**
 
 ## Sound List
 
@@ -21,11 +22,10 @@ This is a free-to-use and open-source collection of scripted sounds for coasters
 
 ## Setup
 
-### 1. **[Download](https://github.com/Emonadeo/Nolimits2Sounds/releases/latest) the latest release and unpack it into your park directory.**
+1. **[Download](https://github.com/Emonadeo/Nolimits2Sounds/releases/latest) the latest release and unpack it into your park directory.**
 
-### 2. **Add the Script to your coaster.**
-
-> **Note:** It is not needed to change the coaster's operation mode to scripted.
+2. **Add the Script to your coaster.**
+    > **Note:** It is not needed to change the coaster's operation mode to scripted.
 
 ![Guide](https://i.imgur.com/WnXCoxe.png)
 
@@ -59,7 +59,7 @@ Some sounds even play an additional audio clip, e.g. the chain dog detaching fro
     
 3. **Name the trigger identical to the corresponding section + `_end`**
 
-### Example
+## Example
 
 ![Example](https://i.imgur.com/hpNbTk6.png)
 

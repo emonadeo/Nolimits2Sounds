@@ -1,0 +1,77 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+import nlvm.lang.*;
+
+import api.*;
+
+public class MiscLsm extends NL2Sound
+{
+    private static final float GAIN_THRESHOLD = 4;
+    private static final float GAIN_BELOW_THRESHOLD_VALUE = 0;
+    private float lastSpeed;
+    private Simulator sim;
+    private int t = 0;
+
+    public MiscLsm(String id)
+    {
+        super(id);
+        sim = NoLimits.getSimulator();
+    }
+
+    public void onInit(StaticSound sound, Train train)
+    {
+        sound.setGain(0.0f);
+        sound.setDistanceParameters(5.0f, 1.0f);
+        sound.setDopplerMode(false);
+        lastSpeed = 0;
+    }
+
+    public void onFrame(StaticSound sound, Train train)
+    {
+        t++;
+        if (t % 5 != 0)
+          return;
+
+        float currentSpeed = (float) train.getSpeed();
+        sound.setPitch(0.95f + currentSpeed * 0.01f);
+        sound.setGainFaded(
+                getClampedGainValue(
+                        Math.abs(getAccelerationFromSpeed(currentSpeed)),
+                        Math.abs(currentSpeed) * 0.6f),
+                0.2f);
+        lastSpeed = currentSpeed;
+    }
+
+    private float getAccelerationFromSpeed(float currentSpeed)
+    {
+        float acceleration = (currentSpeed - lastSpeed) / sim.getCurSimulationTickSec();
+        lastSpeed = currentSpeed;
+        return acceleration;
+    }
+
+    private static float getClampedGainValue(float controlValue, float aboveThreshold)
+    {
+        float gain = controlValue > GAIN_THRESHOLD ? aboveThreshold : GAIN_BELOW_THRESHOLD_VALUE;
+        if(gain > 1)
+        {
+            gain = 1;
+        }
+        else if(gain < 0)
+        {
+            gain = 0;
+        }
+        return gain;
+    }
+
+    public void play(StaticSound sound, Train train)
+    {
+        sound.playLoop();
+    }
+
+    public void stop(StaticSound sound, Train train)
+    {
+        sound.stopFaded(0.2f);
+        lastSpeed = 0;
+    }
+}

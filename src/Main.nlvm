@@ -10,7 +10,14 @@ public class Main extends Script
     private NL2Sound[] sounds = {
         new BMRoar("bm_roar"),
         new BMLift("bm_lift"),
-        new RMCLift("rmc_lift")
+        new RMCLift("rmc_lift"),
+        new GCILift("gci_lift"),
+        new JetFunkyLift("jet_funky_lift"),
+        new JetRoar("jet_roar"),
+        new MiscClunkyLift("misc_clunky_lift"),
+        new MiscLsm("misc_lsm"),
+        new MiscOldLift("misc_old_lift"),
+        new MiscRoar("misc_roar")
     };
 
     public bool onInit() {

@@ -1,0 +1,31 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import api.*;
+
+public class JetFunkyLift extends NL2Sound
+{
+    public JetFunkyLift(String id)
+    {
+        super(id);
+    }
+
+    public void onInit(StaticSound sound, Train train)
+    {
+        sound.setGain(0.0f);
+        sound.setDistanceParameters(5.0f, 5.0f);
+    }
+
+    public void play(StaticSound sound, Train train)
+    {
+        sound.playLoop();
+        sound.setGainFaded(0.7f, 0.2f);
+    }
+
+    public void stop(StaticSound sound, Train train)
+    {
+        sound.setGainFaded(0.0f, 0.5f);
+        sound.stopFaded(0.5f);
+    }
+}

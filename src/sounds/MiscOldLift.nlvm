@@ -1,0 +1,18 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import api.*;
+
+public class MiscOldLift extends NL2Sound
+{
+    public MiscOldLift(String id)
+    {
+        super(id);
+    }
+
+    public void onInit(StaticSound sound)
+    {
+        sound.setDistanceParameters(5.0f, 1.0f);
+    }
+}

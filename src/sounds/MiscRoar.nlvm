@@ -1,0 +1,25 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import api.*;
+
+public class MiscRoar extends NL2Sound
+{
+    public MiscRoar(String id)
+    {
+        super(id);
+    }
+
+    public bool shouldPlay(Coaster coaster, Train train)
+    {
+        return true;
+    }
+
+    public void onFrame(StaticSound sound, Train train)
+    {
+        sound.setDistanceParameters((float)Math.abs(train.getSpeed()*2),2.0f);
+        sound.setPitch((float)Math.abs(train.getSpeed()/20));
+        sound.setGain((float)Math.abs(train.getSpeed()*200));
+    }
+}

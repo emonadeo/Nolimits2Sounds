@@ -1,0 +1,29 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import api.*;
+
+public class MiscClunkyLift extends NL2Sound
+{
+    public MiscClunkyLift(String id)
+    {
+        super(id);
+    }
+
+    public void onInit(StaticSound sound, Train train)
+    {
+        sound.setDistanceParameters(5.0f, 1.0f);
+    }
+
+    public void onFrame(StaticSound sound, Train train)
+    {
+        sound.setPitch((float)train.getSpeed()/2.2f);
+        sound.setGain(1.5f/(float)train.getSpeed());
+        /* Disable Max Speed Check
+        if(train.getSpeed() > 3.0f)
+        {
+            sound.setGainFaded(0.0f, 0.5f);
+        }*/
+    }
+}

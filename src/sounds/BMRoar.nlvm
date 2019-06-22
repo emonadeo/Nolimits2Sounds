@@ -18,7 +18,11 @@ public class BMRoar extends NL2Sound
     public void onFrame(StaticSound sound, Train train)
     {
         sound.setDistanceParameters((float)Math.abs(train.getSpeed()*2),2.0f);
-        sound.setPitch((float)Math.abs(train.getSpeed()/20));
-        sound.setGain((float)Math.abs(train.getSpeed()*200));
+        sound.setGain((float)Math.abs(train.getSpeed() * 0.2f) - 1);
+        if (train.getSpeed() > 25) {
+            sound.setPitch(1);
+        } else {
+            sound.setPitch((float)Math.abs(train.getSpeed() / 25));
+        }
     }
 }

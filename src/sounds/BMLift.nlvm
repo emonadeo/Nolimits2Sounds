@@ -24,14 +24,12 @@ public class BMLift extends NL2Sound
 
     public void play(StaticSound sound, Train train)
     {
-        System.out.println("PLAY");
         sound.playLoop();
         sound.setGainFaded(1.0f, 2.0f);
     }
 
     public void stop(StaticSound sound, Train train)
     {
-        System.out.println("STOP");
         sound.setGainFaded(0.0f, 0.2f);
         sound.stopFaded(0.2f);
     }

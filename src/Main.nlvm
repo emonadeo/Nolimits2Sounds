@@ -10,6 +10,7 @@ public class Main extends Script
     private NL2Sound[] sounds = {
         new BMRoar("bm_roar"),
         new BMLift("bm_lift"),
+        new BMBrake("bm_brake"),
         new RMCLift("rmc_lift"),
         new GCILift("gci_lift"),
         new JetFunkyLift("jet_funky_lift"),
@@ -25,6 +26,8 @@ public class Main extends Script
 
         for (int i = 0; i < this.sounds.length; i++) {
             if (coaster.getSection(this.sounds[i].getId()) != null || coaster.getSection(this.sounds[i].getId() + "_1") != null)
+                this.sounds[i].init(this.sim, this.sim.getCoasterForEntityId(getParentEntityId()));
+            else if (coaster.getTrackTrigger(this.sounds[i].getId()) != null || coaster.getTrackTrigger(this.sounds[i].getId() + "_1") != null)
                 this.sounds[i].init(this.sim, this.sim.getCoasterForEntityId(getParentEntityId()));
         }
         return true;

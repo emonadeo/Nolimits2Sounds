@@ -10,10 +10,14 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
     private Coaster coaster;
     private StaticSound[] sounds;
     private StaticSound[] ends;
-    private bool hasEnd = true;
     private Train[] trains;
-    private bool playing[];
-    private Section[] sections;
+    private Section[] sections; // Normal Sections
+    private TrackTrigger[] triggers; // Sections made of Triggers
+    private String[] triggerStr; // Names of the Triggers listed above
+
+    protected bool hasEndAudio = true;
+    protected bool[] isInTriggerSection;
+    protected bool[] isPlaying;
 
     public NL2Sound(String id) {
         this.id = id;
@@ -29,66 +33,123 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
         this.sounds = new StaticSound[coaster.getTrainCount()];
         this.ends = new StaticSound[coaster.getTrainCount()];
         this.trains = new Train[coaster.getTrainCount()];
-        this.playing = new bool[coaster.getTrainCount()];
+        this.isPlaying = new bool[coaster.getTrainCount()];
+        this.isInTriggerSection = new bool[coaster.getTrainCount()];
 
-        this.hasEnd = StaticSound.loadFromResourceId(this.id + "_end", 0) != null;
+        this.hasEndAudio = StaticSound.loadFromResourceId(this.id + "_end", 0) != null;
 
         for(int i = 0; i < coaster.getTrainCount(); i++)
         {
             this.trains[i] = coaster.getTrainAt(i);
             this.sounds[i] = StaticSound.loadFromResourceId(this.id, 0);
+            this.isPlaying[i] = false;
+            this.isInTriggerSection[i] = false;
             this.onInit(this.sounds[i]);
 
-            if (this.hasEnd) {
+            if (this.hasEndAudio) {
                 this.ends[i] = StaticSound.loadFromResourceId(this.id + "_end", 0);
                 this.onInit(this.ends[i]);
             }
         }
 
-        // Check single section
-        bool hasSingleSection = false;
-        if (coaster.getSection(id) != null) {
-            hasSingleSection = true;
-        }
+        this.initSections();
 
-        // Check multi section
-        int n = 1;
-        while (coaster.getSection(this.id + "_" + n) != null) {
-            n++;
-        }
-
-        if (hasSingleSection) {
-            this.sections = new Section[n];
-            this.sections[0] = coaster.getSection(id);
-        } else {
-            this.sections = new Section[n-1];
-        }
-
-        for (int i = 1; i < n; i++) {
-            if (!hasSingleSection) {
-                this.sections[i-1] = coaster.getSection(this.id + "_" + i);
-            } else {
-                this.sections[i] = coaster.getSection(this.id + "_" + i);
+        // Register End Triggers
+        for (int i = 0; i < this.sections.length; i++) {
+            if (this.coaster.getTrackTrigger(this.sections[i].getName() + "_end") != null) {
+                this.coaster.getTrackTrigger(this.sections[i].getName() + "_end").addTrackTriggerListener(this);
             }
         }
 
-        // Check single trigger
-        if (this.coaster.getTrackTrigger(this.id + "_end") != null) {
-            this.coaster.getTrackTrigger(this.id + "_end").addTrackTriggerListener(this);
-        }
-
-        // Check multi section
-        for (int m = 1; this.coaster.getTrackTrigger(this.id + "_" + m + "_end") != null; m++) {
-            this.coaster.getTrackTrigger(this.id + "_" + m + "_end").addTrackTriggerListener(this);
+        for (int i = 0; i < this.triggers.length; i++) {
+            this.coaster.getTrackTrigger(this.triggerStr[i]).addTrackTriggerListener(this);
+            if (this.coaster.getTrackTrigger(this.triggerStr[i] + "_end") != null) {
+                this.coaster.getTrackTrigger(this.triggerStr[i] + "_end").addTrackTriggerListener(this);
+            } else {
+                System.out.println(this.triggerStr[i] + " does not have an Endpoint.");
+            }
         }
 
         sim.addFrameListener(this);
     }
 
+    private void initSections() {
+        bool hasSingleSection = false;
+        bool hasSingleTrigger = false;
+
+        if (coaster.getSection(id) != null)
+            hasSingleSection = true;
+
+        if (coaster.getTrackTrigger(id) != null)
+            hasSingleTrigger = true;
+
+        if (hasSingleSection && hasSingleTrigger)
+            System.err.println("Duplicate Section/Trigger found! (" + id + ")");
+
+        int n = 1; // Total Count
+        int n_s = 1; // Section Count
+        int n_t = 1; // Trigger Count
+        while (coaster.getSection(this.id + "_" + n) != null || coaster.getTrackTrigger(this.id + "_" + n) != null) {
+            bool dupl = false;
+            if (coaster.getSection(this.id + "_" + n) != null) {
+                n_s++;
+                dupl = true;
+            }
+            if (coaster.getTrackTrigger(this.id + "_" + n) != null) {
+                n_t++;
+                if (dupl) {
+                    System.err.println("Duplicate Section/Trigger found! (" + this.id + "_" + n + ")");
+                }
+            }
+            n++;
+        }
+
+        if (hasSingleSection) {
+            this.sections = new Section[n_s];
+            this.sections[0] = coaster.getSection(id);
+        } else {
+            this.sections = new Section[n_s-1];
+        }
+
+        if (hasSingleTrigger) {
+            this.triggers = new TrackTrigger[n_t];
+            this.triggerStr = new String[n_t];
+            this.triggers[0] = coaster.getTrackTrigger(id);
+            this.triggerStr[0] = id;
+        } else {
+            this.triggers = new TrackTrigger[n_t-1];
+            this.triggerStr = new String[n_t-1];
+        }
+
+        int c_s = 1;
+        int c_t = 1;
+        for (int i = 1; i < n; i++) {
+            if (coaster.getSection(this.id + "_" + i) != null) {
+                if (!hasSingleSection) {
+                    this.sections[c_s-1] = coaster.getSection(this.id + "_" + i);
+                } else {
+                    this.sections[c_s] = coaster.getSection(this.id + "_" + i);
+                }
+                c_s++;
+            }
+
+            if (coaster.getTrackTrigger(this.id + "_" + i) != null) {
+                if (!hasSingleTrigger) {
+                    this.triggers[c_t-1] = coaster.getTrackTrigger(this.id + "_" + i);
+                    this.triggerStr[c_t-1] = this.id + "_" + i;
+                } else {
+                    this.triggers[c_t] = coaster.getTrackTrigger(this.id + "_" + i);
+                    this.triggerStr[c_t] = this.id + "_" + i;
+                }
+                c_t++;
+            }
+        }
+    }
+
     public void onNextFrame() {
         for (int i = 0; i < coaster.getTrainCount(); i++) {
 
-            if (this.playing[i]) {
+            if (this.isPlaying[i]) {
 
                 Vector3f pos = new Vector3f(0, 0, 0);
                 this.trains[i].getBogieOrientationAndPosition(0, null, null, null, pos);
@@ -97,24 +158,25 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
 
                 if (!this.shouldPlay(this.coaster, this.trains[i])) {
                     this.stop(this.sounds[i], this.trains[i]);
-                    this.playing[i] = false;
+                    this.isPlaying[i] = false;
                 }
 
             } else {
 
                 if (this.shouldPlay(this.coaster, this.trains[i])) {
                     this.play(this.sounds[i], this.trains[i]);
-                    this.playing[i] = true;
+                    this.isPlaying[i] = true;
                 }
             }
         }
     }
 
     public void onTrainEntering(TrackTrigger trigger, Train train) {
-        for (int i = 0; i < this.trains.length; i++) {
-            if (this.trains[i] == train) {
+        int t = this.getTrainId(train);
+        for (int i = 0; i < this.sections.length; i++) {
+            if (this.coaster.getTrackTrigger(this.sections[i].getName() + "_end") == trigger) {
                 this.stop(this.sounds[i], train);
-                if (this.hasEnd) {
+                if (this.hasEndAudio) {
                     Vector3f pos = new Vector3f(0, 0, 0);
                     train.getBogieOrientationAndPosition(0, null, null, null, pos);
                     this.ends[i].setPosition(pos);
@@ -123,6 +185,30 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
                 return;
             }
         }
+        for (int i = 0; i < this.triggers.length; i++) {
+            if (this.triggers[i] == trigger) {
+                this.isInTriggerSection[t] = true;
+                return;
+            } else if (this.coaster.getTrackTrigger(this.triggerStr[i] + "_end") == trigger) {
+                this.isInTriggerSection[t] = false;
+                if (this.hasEndAudio) {
+                    Vector3f pos = new Vector3f(0, 0, 0);
+                    train.getBogieOrientationAndPosition(0, null, null, null, pos);
+                    this.ends[i].setPosition(pos);
+                    this.playEnd(ends[i], train);
+                }
+                return;
+            }
+        }
+    }
+
+    protected int getTrainId(Train train) {
+        for (int i = 0; i < this.trains.length; i++) {
+            if (this.trains[i] == train) {
+                return i;
+            }
+        }
+        return -1; // This should NEVER be returned
     }
 
     public void onTrainLeaving(TrackTrigger trigger, Train train) {}
@@ -147,6 +233,10 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
                 return true;
             }
         }
+
+        if (this.isInTriggerSection[this.getTrainId(train)])
+            return true;
+
         return false;
     }
 

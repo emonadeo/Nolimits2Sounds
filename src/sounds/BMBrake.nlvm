@@ -1,0 +1,30 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import api.*;
+
+public class BMBrake extends NL2Sound
+{
+    public BMBrake(String id)
+    {
+        super(id);
+    }
+
+    public void onInit(StaticSound sound)
+    {
+        sound.setGain(1.0f);
+        sound.setDistanceParameters(5.0f, 1.0f);
+    }
+
+    public void play(StaticSound sound, Train train)
+    {
+        sound.stop();
+        sound.play();
+    }
+
+    public void onTrainEntering(TrackTrigger trigger, Train train) {
+        super.onTrainEntering(trigger, train);
+        this.isPlaying[this.getTrainId(train)] = false; // Immediatly set "isPlaying" back to false, as the Sound doesn't loop
+    }
+}

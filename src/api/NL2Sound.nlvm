@@ -175,12 +175,12 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
         int t = this.getTrainId(train);
         for (int i = 0; i < this.sections.length; i++) {
             if (this.coaster.getTrackTrigger(this.sections[i].getName() + "_end") == trigger) {
-                this.stop(this.sounds[i], train);
+                this.stop(this.sounds[t], train);
                 if (this.hasEndAudio) {
                     Vector3f pos = new Vector3f(0, 0, 0);
                     train.getBogieOrientationAndPosition(0, null, null, null, pos);
-                    this.ends[i].setPosition(pos);
-                    this.playEnd(ends[i], train);
+                    this.ends[t].setPosition(pos);
+                    this.playEnd(ends[t], train);
                 }
                 return;
             }
@@ -221,7 +221,7 @@ public abstract class NL2Sound implements FrameListener, TrackTriggerListener {
     public void onInit(StaticSound sound) {
         sound.setGain(0.0f);
     }
-
+    
     /**
     * Returns true or false whether the sound should play or not.
     * Don't change this method if you want the sound to play while the train is on the desired section.

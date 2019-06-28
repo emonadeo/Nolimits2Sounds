@@ -19,7 +19,11 @@ public class BMLift extends NL2Sound
 
     public void onFrame(StaticSound sound, Train train)
     {
-        sound.setPitch((float)train.getSpeed()/2.85f);
+        float pitch = (float)train.getSpeed()/2.85f;
+        if (pitch > 1.2f) {
+            pitch = 1.2f;
+        }
+        sound.setPitch(pitch);
     }
 
     public void play(StaticSound sound, Train train)

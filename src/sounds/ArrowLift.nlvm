@@ -1,0 +1,18 @@
+package sounds;
+
+import com.nolimitscoaster.*;
+
+import api.*;
+
+public class ArrowLift extends NL2Sound
+{
+    public ArrowLift(String id)
+    {
+        super(id);
+    }
+
+    public void onInit(StaticSound sound)
+    {
+        sound.setDistanceParameters(7.0f, 1.0f);
+    }
+}

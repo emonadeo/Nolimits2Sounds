@@ -8,6 +8,7 @@ public class Main extends Script
     private Coaster coaster;
 
     private NL2Sound[] sounds = {
+        new ArrowLift("arrow_lift"),
         new BMRoar("bm_roar"),
         new BMLift("bm_lift"),
         new BMBrake("bm_brake"),

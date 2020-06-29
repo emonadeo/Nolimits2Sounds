@@ -23,6 +23,9 @@ public class BMLift extends NL2Sound
         if (pitch > 1.2f) {
             pitch = 1.2f;
         }
+        if (train.getSpeed() < 1.5f) {
+            sound.setGain(pitch);
+        }
         sound.setPitch(pitch);
     }
 

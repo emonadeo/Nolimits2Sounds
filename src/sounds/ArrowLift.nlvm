@@ -15,4 +15,13 @@ public class ArrowLift extends NL2Sound
     {
         sound.setDistanceParameters(7.0f, 1.0f);
     }
+
+    public void onFrame(StaticSound sound, Train train)
+    {
+        if (train.getSpeed() < 1.3f) {
+            float pitch = (float)train.getSpeed()/1.3f;
+            sound.setPitch(pitch);
+            sound.setGain(pitch * 1.4f);
+        }
+    }
 }

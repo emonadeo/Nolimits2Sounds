@@ -7,7 +7,10 @@ including custom lift sounds and various roars. &mdash; **[Download](https://git
 
 | Name | Description | Source | Contributor |
 | ---- | ----------- | ------ | ----------- |
-| `bm_lift` | B&M Lift Sound | Silver Star @ Europapark | |
+| `arrow_looper_lift` | Classic Arrow Looper Lift Sound | Loch Ness Monster @ Busch Gardens Williamsburg | |
+| `arrow_minetrain_lift` | Arrow Mine Train Lift Sound | Thunderation @ Silver Dollar City | [jpaufsc](https://nolimitscentral.com/account/jpaufsc) |
+| `bm_lift` | Lift Sound for B&M Hyper Coasters, Inverted Coasters and modern B&Ms in general | Silver Star @ Europapark | |
+| `bm_lift2` | Older Lift Sound for B&M Sitdowns, Floorless Coasters and older B&Ms in general| Wildfire @ Silver Dollar City | [jpaufsc](https://nolimitscentral.com/account/jpaufsc) |
 | `bm_roar`| B&M Roar Sound | | [TheCodeMaster](https://nolimitscentral.com/account/thecodemaster) |
 | `gci_lift` | GCI Lift Sound | Wood Coaster @ Knight Valley | |
 | `rmc_lift` | RMC Lift Sound | Twisted Timbers @ Kings Island | |
@@ -16,7 +19,7 @@ including custom lift sounds and various roars. &mdash; **[Download](https://git
 | `misc_roar` | Roar suitable for most steel coaster types | | [TheCodeMaster](https://nolimitscentral.com/account/thecodemaster) |
 | `misc_clunky_lift` | Clunky Sound for old and slow Lifts | Speed @ Oakwood | |
 | `misc_old_lift` | Vintage Sound for normal and fast Lifts. Similar to the existing Sound | Speed @ Oakwood | |
-| `misc_lsm` | General Purpose LSM Sound | | [bestdani](https://nolimitscentral.com/account/bestdani) |
+| `misc_lsm` | General purpose LSM Sound | | [bestdani](https://nolimitscentral.com/account/bestdani) |
 
 # Usage Guide
 

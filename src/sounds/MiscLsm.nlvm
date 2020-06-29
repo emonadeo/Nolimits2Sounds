@@ -35,11 +35,6 @@ public class MiscLsm extends NL2Sound
 
         float currentSpeed = (float) train.getSpeed();
         sound.setPitch(0.95f + currentSpeed * 0.01f);
-        sound.setGainFaded(
-                getClampedGainValue(
-                        Math.abs(getAccelerationFromSpeed(currentSpeed)),
-                        Math.abs(currentSpeed) * 0.6f),
-                0.2f);
         lastSpeed = currentSpeed;
     }
 
@@ -50,23 +45,10 @@ public class MiscLsm extends NL2Sound
         return acceleration;
     }
 
-    private static float getClampedGainValue(float controlValue, float aboveThreshold)
-    {
-        float gain = controlValue > GAIN_THRESHOLD ? aboveThreshold : GAIN_BELOW_THRESHOLD_VALUE;
-        if(gain > 1)
-        {
-            gain = 1;
-        }
-        else if(gain < 0)
-        {
-            gain = 0;
-        }
-        return gain;
-    }
-
     public void play(StaticSound sound, Train train)
     {
         sound.playLoop();
+        sound.setGainFaded(1, 1.0f);
     }
 
     public void stop(StaticSound sound, Train train)
